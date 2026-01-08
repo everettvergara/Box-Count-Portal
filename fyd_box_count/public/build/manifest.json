@@ -1,0 +1,20 @@
+{
+  "resources/js/app.jsx": {
+    "file": "app-DILTObKp.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "css": [
+      "app-DxfFOTtH.css"
+    ]
+  },
+  "resources/sass/app.scss": {
+    "file": "app-aOLKl0pV.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  }
+}
