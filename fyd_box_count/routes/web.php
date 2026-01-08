@@ -4,6 +4,9 @@ use App\Helpers\RouteHelpers;
 use App\Http\Controllers\select2_controller;
 use App\Http\Controllers\tb_bc_mf_company_controller;
 use App\Http\Controllers\tb_bc_mf_warehouse_controller;
+use App\Http\Controllers\tb_bc_mf_warehouse_portal_controller;
+use App\Http\Controllers\tb_bc_tr_box_count_controller;
+use App\Http\Controllers\tb_bc_tr_box_count_image_controller;
 use App\Http\Controllers\tb_sys_mf_access_type_controller;
 use App\Http\Controllers\tb_sys_mf_mod_access_type_controller;
 use App\Http\Controllers\tb_sys_mf_mod_controller;
@@ -116,7 +119,10 @@ Route::middleware(['auth', "can:has_access,'Audits'"])->controller(tb_sys_tr_aud
 
 Route::middleware('auth', "can:has_access,'Companies'")->resource('companies', tb_bc_mf_company_controller::class);
 Route::middleware('auth', "can:has_access,'Warehouses'")->resource('warehouses', tb_bc_mf_warehouse_controller::class);
+RouteHelpers::detail_controller('Warehouses', tb_bc_mf_warehouse_portal_controller::class, 'warehouse-portals', 'warehouse', 'warehouse_portal');
 
+Route::middleware('auth', "can:has_access,'BoxCounts'")->resource('box-counts', tb_bc_tr_box_count_controller::class);
+RouteHelpers::detail_controller('BoxCounts', tb_bc_tr_box_count_image_controller::class, 'box-count-images', 'box_count', 'box_count_image');
 
 Auth::routes(['register' => false]);
 
