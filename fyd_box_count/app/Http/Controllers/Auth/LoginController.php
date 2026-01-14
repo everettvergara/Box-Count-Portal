@@ -53,7 +53,6 @@ class LoginController extends Controller
         // Manual validation for API
         $validator = Validator::make($r->all(), [
             'user_code'  => 'required|string',
-            'device'     => 'required|string',
             'password'   => 'required|string',
         ]);
 
@@ -84,41 +83,8 @@ class LoginController extends Controller
         }
 
         $user = Auth::user();
-
-        // Find client by code
-        $client = \DB::table('tb_crm_mf_client')
-            ->where('user_id', $user->id)
-            ->first();
-
-        if (!$client) {
-            return response()->json([
-                'success' => false,
-                'error' => [
-                    'code' => 'CLIENT_NOT_FOUND',
-                    'message' => 'Invalid client code.',
-                ]
-            ], 401);
-        }
-
-        // Get latest device record
-        $device = \DB::table('tb_crm_mf_client_device')
-            ->where('client_id', $client->id)
-            ->where('name', $r->device)
-            ->orderBy('id', 'desc')
-            ->first();
-
-        if (!$device) {
-            return response()->json([
-                'success' => false,
-                'error' => [
-                    'code' => 'DEVICE_NOT_FOUND',
-                    'message' => 'Device not registered for this client.',
-                ]
-            ], 401);
-        }
-
         // Generate token
-        $newToken = $user->createToken('authToken', ['device_id' => $device->id]);
+        $newToken = $user->createToken('authToken',);
         $newToken->accessToken->expires_at = Carbon::now()->endOfDay();
         $newToken->accessToken->save();
 
@@ -128,12 +94,9 @@ class LoginController extends Controller
             'success' => true,
             'data' => [
                 'access_token' => $token,
-                'client_code'  => $client->code,
-                'client_key'   => $device->client_key,
             ]
         ], 200);
     }
-
 
     protected function redirectTo()
     {

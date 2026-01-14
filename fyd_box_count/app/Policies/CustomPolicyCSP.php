@@ -28,11 +28,13 @@ class CustomPolicyCSP extends Policy
                 Keyword::SELF,
                 'https://unpkg.com',
                 'https://cdn.jsdelivr.net',
+                'https://fonts.googleapis.com',
             ])
             ->addDirective(Directive::SCRIPT_ELEM, [
                 Keyword::SELF,
                 'https://unpkg.com',
                 'https://cdn.jsdelivr.net',
+                'https://fonts.googleapis.com',
             ])
             ->addDirective(Directive::STYLE, [
                 Keyword::SELF,
@@ -53,6 +55,7 @@ class CustomPolicyCSP extends Policy
                 Keyword::SELF,
                 'https://fonts.gstatic.com',
                 'https://fonts.bunny.net',
+                'https://fonts.googleapis.com',
                 'data:',
             ])
             ->addDirective(Directive::FORM_ACTION, [

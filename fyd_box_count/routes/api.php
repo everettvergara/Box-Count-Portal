@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\collectimate_controller;
+use App\Http\Controllers\box_count_controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/v1/auth', [LoginController::class, 'api_login']);
 
-Route::middleware('auth:sanctum')->controller(collectimate_controller::class)->group(function () {
-    Route::get('/v1/license', 'get_license')->name('licenses.get-license');
-    Route::get('/v1/script-retrieve', 'get_script')->name('licenses.script-retrieve');
+Route::middleware('auth:sanctum')->controller(box_count_controller::class)->group(function () {
+    Route::post('/v1/box-count/create-transaction', 'create_transaction')->name('box-count.create-transaction');
+    Route::post('/v1/box-count/update-count', 'update_count')->name('box-count.update-count');
 });
 
 
